@@ -24,7 +24,7 @@ class RESTPasswordServerTest
 	private RestTestClient tClient;
 	
 	@Test
-	void testMain()
+	void testroot()
 	{
 		tClient.get()
 		.uri("/")
@@ -44,6 +44,60 @@ class RESTPasswordServerTest
 </ol>
 </html>"""
 				);
+		
+		
+	}
+	
+	
+	@Test
+	void testInteraction()
+	{
+		//nothing at start
+		tClient.get().uri("/request").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Requesters: []");
+		
+		tClient.get().uri("/auth").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Authorized: []");
+		
+		//request first password
+		
+		tClient.get().uri("/request/michael").exchange()
+		.expectBody(String.class)
+		.isEqualTo("7575"); 
+		//TODO add a mock to return a value I can check
+		
+		//calling again to make sure we don't double book
+		tClient.get().uri("/request/michael").exchange()
+		.expectBody(String.class);
+		 		
+		tClient.get().uri("/request").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Requesters: [michael]");
+	
+		//no change to auth
+		tClient.get().uri("/auth").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Authorized: []");
+		
+		tClient.get().uri("/auth/michael/7575").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Authentication Successful");
+		
+		//check for double insert
+		tClient.get().uri("/auth/michael/7575").exchange()
+		.expectBody(String.class)
+		.isEqualTo("Authentication Successful");
+
+		//no change to auth
+		tClient.get().uri("/auth").exchange()
+				.expectBody(String.class)
+				.isEqualTo("Authorized: [michael]");
+				
+		
+		
+		
 		
 		
 	}
