@@ -1,5 +1,6 @@
 package restPasswordServer;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AutoConfigureRestTestClient
 class RESTPasswordServerTest
 {
-	//@Autowired
-	//private RESTPasswordServer server;
+	@Autowired
+	private RESTPasswordServer server;
 
 	
 	@Autowired
@@ -94,12 +95,15 @@ class RESTPasswordServerTest
 		tClient.get().uri("/auth").exchange()
 				.expectBody(String.class)
 				.isEqualTo("Authorized: [michael]");
-				
+	
 		
 		
 		
-		
-		
+		assertThat(server.requesters).contains("michael");
+		assertThat(server.requesters).hasSize(1);
 	}
 
+	
+	
+	
 }
