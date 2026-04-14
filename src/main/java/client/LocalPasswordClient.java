@@ -15,22 +15,10 @@ public class LocalPasswordClient extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-
 		TestingPasswordModel model = new TestingPasswordModel();
 		ViewTransitionalModel tm = new ViewTransitionalModel(stage, model);
 		tm.showLoginScene();
-		/*
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(LoginController.class.getResource("./login.fxml"));
-		Parent view = loader.load();
-		LoginController cont = loader.getController();
-		cont.setModel(model,new ViewTransitionalModel(stage, model));
-
-		Scene s = new Scene(view);
-		stage.setScene(s);
-		*/
 		stage.show();
-
 	}
 
 	public static void main(String[] args)

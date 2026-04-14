@@ -6,7 +6,11 @@ import client.model.AbstractPasswordModel;
 import client.model.ViewTransitionalModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 
 public class LoginController
 {
@@ -40,7 +44,12 @@ public class LoginController
 	    	}
 	    	else
 	    	{
-	    		JOptionPane.showMessageDialog(null,  "Bad UserName/Password", "alert", JOptionPane.ERROR_MESSAGE);
+	    		
+	    		Dialog<Boolean> dialog = new Dialog<>();
+	            dialog.setTitle("alert");
+	            dialog.setHeaderText("Bad UserName/Password");
+	            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+	            dialog.show();
 	    	}
 	  
 	    }
@@ -48,7 +57,12 @@ public class LoginController
 	    @FXML
 	    void onRequestClicked(ActionEvent event) 
 	    {
-	    	JOptionPane.showMessageDialog(null, "Password for "+model.getUsername().get()+" is "
-	    			+model.requestPassword(), "Requested Password",  JOptionPane.INFORMATION_MESSAGE);
+	    	
+	    	Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setTitle("Requested Password");
+            dialog.setHeaderText("Password for "+model.getUsername().get()+" is "
+	    			+model.requestPassword());
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            dialog.show();
 	    }
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.LoginController">
+<VBox prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.LoginController">
    <children>
       <Label alignment="TOP_CENTER" prefHeight="62.0" prefWidth="400.0" text="Password Client" textAlignment="CENTER">
          <font>
@@ -30,8 +30,8 @@
          <children>
             <Label text="User Name" />
             <Label text="Password" GridPane.rowIndex="1" />
-            <TextField fx:id="UserNameTB" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" />
-            <TextField id="PasswordID" fx:id="PasswordTB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField id="userNameID" fx:id="UserNameTB" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" />
+            <TextField id="passwordID" fx:id="PasswordTB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
             <Insets left="50.0" right="50.0" />
@@ -39,8 +39,8 @@
       </GridPane>
       <HBox prefHeight="37.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="25.0" prefWidth="66.0" text="Login" />
-            <Button mnemonicParsing="false" onAction="#onRequestClicked" text="Request Password" />
+            <Button id="loginID" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="25.0" prefWidth="66.0" text="Login" />
+            <Button id="requestID" mnemonicParsing="false" onAction="#onRequestClicked" text="Request Password" />
          </children>
          <VBox.margin>
             <Insets left="100.0" right="100.0" />

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class TestingPasswordModel extends AbstractPasswordModel
 {
 
-	
-	ArrayList<String> requestsA = new ArrayList<>();
-	ArrayList<String> logsA= new ArrayList<>();
+	//As this is only for testing, I wanted to make it easier to alter the data
+	public ArrayList<String> requestsA = new ArrayList<>();
+	public ArrayList<String> logsA= new ArrayList<>();
 	
 	@Override
 	public String requestPassword()
