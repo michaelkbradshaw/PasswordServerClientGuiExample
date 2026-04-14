@@ -2,7 +2,7 @@ package restPasswordServer;
 
 import org.springframework.web.client.RestClient;
 
-public class StudentRESTPassword
+public class SimplePasswordUsage
 {
 
 	public static void main(String[] args)
