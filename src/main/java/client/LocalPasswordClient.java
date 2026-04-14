@@ -1,6 +1,7 @@
 package client;
 
 import client.model.TestingPasswordModel;
+import client.model.ViewTransitionalModel;
 import client.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ public class LocalPasswordClient extends Application
 		loader.setLocation(LoginController.class.getResource("./login.fxml"));
 		Parent view = loader.load();
 		LoginController cont = loader.getController();
-		cont.setModel(model);
+		cont.setModel(model,new ViewTransitionalModel(stage, model));
 
 		Scene s = new Scene(view);
 		stage.setScene(s);

@@ -3,6 +3,7 @@ package client.view;
 import javax.swing.JOptionPane;
 
 import client.model.AbstractPasswordModel;
+import client.model.ViewTransitionalModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -18,13 +19,16 @@ public class LoginController
 
 	    
 	    AbstractPasswordModel model;
+	    ViewTransitionalModel vm;
 	    
-	    public void setModel(AbstractPasswordModel model)
+	    public void setModel(AbstractPasswordModel model,ViewTransitionalModel vm)
 	    {
 	    	this.model = model;
+	    	this.vm = vm;
 	    	
 	    	UserNameTB.textProperty().bindBidirectional(model.getUsername());
 	    	PasswordTB.textProperty().bindBidirectional(model.getPassword());
+	    	
 	    }
 	    
 	    @FXML
@@ -32,7 +36,7 @@ public class LoginController
 	    {
 	    	if(model.checkPassword())
 	    	{
-	    		JOptionPane.showMessageDialog(null,  "Success!","alert", JOptionPane.ERROR_MESSAGE);
+	    		vm.showAdminScene();
 	    	}
 	    	else
 	    	{
