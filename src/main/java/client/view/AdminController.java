@@ -21,8 +21,6 @@ public class AdminController {
     void logout(ActionEvent event) 
     {
     	vm.showLoginScene();
-    	
-    	
     }
     
     AbstractPasswordModel model;
@@ -37,6 +35,13 @@ public class AdminController {
     	RequestedLV.setItems(model.getRequests());
     	
     	UserName.textProperty().bindBidirectional(model.getUsername());
+    }
+    
+    
+    @FXML
+    void onRefresh(ActionEvent event) 
+    {
+    	model.pullData();
     }
     
     

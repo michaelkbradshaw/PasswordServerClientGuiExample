@@ -17,6 +17,9 @@ public class LocalPasswordClient extends Application
 	{
 
 		TestingPasswordModel model = new TestingPasswordModel();
+		ViewTransitionalModel tm = new ViewTransitionalModel(stage, model);
+		tm.showLoginScene();
+		/*
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(LoginController.class.getResource("./login.fxml"));
 		Parent view = loader.load();
@@ -25,6 +28,7 @@ public class LocalPasswordClient extends Application
 
 		Scene s = new Scene(view);
 		stage.setScene(s);
+		*/
 		stage.show();
 
 	}

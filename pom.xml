@@ -9,8 +9,8 @@
 	<description>testing rest</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>23</maven.compiler.source>
-		<maven.compiler.target>23</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -23,12 +23,12 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>23.0.2</version>
+			<version>17.0.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>23.0.2</version>
+			<version>17.0.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testfx</groupId>

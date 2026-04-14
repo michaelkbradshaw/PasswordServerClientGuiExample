@@ -6,15 +6,15 @@ public class TestingPasswordModel extends AbstractPasswordModel
 {
 
 	
-	ArrayList<String> requests = new ArrayList<>();
-	ArrayList<String> logs= new ArrayList<>();
+	ArrayList<String> requestsA = new ArrayList<>();
+	ArrayList<String> logsA= new ArrayList<>();
 	
 	@Override
 	public String requestPassword()
 	{
-		if(! requests.contains(this.username.get()))
+		if(! requestsA.contains(this.username.get()))
 		{
-			requests.add(this.username.get());
+			requestsA.add(this.username.get());
 		}
 		return this.username.get()+"PW";
 	}
@@ -25,9 +25,9 @@ public class TestingPasswordModel extends AbstractPasswordModel
 		
 		boolean ret = requestPassword().equals(this.password.get());
 		
-		if(ret && ! logs.contains(this.username.get()))
+		if(ret && ! logsA.contains(this.username.get()))
 		{
-			logs.add(this.username.get());
+			logsA.add(this.username.get());
 		}
 		
 		return ret;
@@ -37,7 +37,11 @@ public class TestingPasswordModel extends AbstractPasswordModel
 	@Override
 	public void pullData()
 	{
-		// TODO Auto-generated method stub
+		this.getRequests().clear();
+		this.getRequests().addAll(requestsA);
+		
+		this.getLogged().clear();
+		this.getLogged().addAll(logsA);
 		
 	}
 
