@@ -25,7 +25,7 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 	{
 		new SpringApplicationBuilder(RESTPasswordServer.class)
         //.profiles("password")
-		.profiles("random")
+		//.profiles("random")
         .run(args);
 		
 		//I prefer the builder method above to this one.
@@ -43,7 +43,6 @@ public class RESTPasswordServer extends SpringBootServletInitializer
         return event -> {
             int serverPort = event.getWebServer().getPort();
             System.out.println("Port is "+serverPort);
-            // TODO do something with the `serverPort`
         };
     }
 
@@ -81,6 +80,11 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 		return "Requesters: "+requesters.toString();
 	}
 	
+	@GetMapping("/requestList")
+	public String[] getRequestList()
+	{
+		return requesters.toArray(new String[0]);
+	}
 	
 
 	@GetMapping("/server")
@@ -92,7 +96,7 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 			ipAddr = InetAddress.getLocalHost();
 
 			return "ServerData IP:  "+ ipAddr.getHostAddress() +
-			"\n try two "+this.serverContext.getWebServer().getPort();
+			":"+this.serverContext.getWebServer().getPort();
 
 		} catch (UnknownHostException e)
 		{
@@ -101,7 +105,7 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 		}
   
 		return "ServerData IP:  Unknown   "+
-		"\n try two "+this.serverContext.getWebServer().getPort();
+		":"+this.serverContext.getWebServer().getPort();
 	}
 	
 	@GetMapping("/request/{username}")
@@ -117,6 +121,12 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 	public String getAuths()
 	{
 		return "Authorized: "+auths.toString();
+	}
+	
+	@GetMapping("/authList")
+	public String[] getAuthList()
+	{
+		return auths.toArray(new String[0]);
 	}
 
 	@GetMapping("/auth/{username}/{password}")
