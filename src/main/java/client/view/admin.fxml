@@ -21,7 +21,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="RequestedLV" />
+                  <ListView id="requestLVID" fx:id="RequestedLV" />
                </children>
             </VBox>
             <VBox>
@@ -31,7 +31,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="LoggedInLV" />
+                  <ListView id="LoggedLVID" fx:id="LoggedInLV" />
                </children>
             </VBox>
          </items>
@@ -45,7 +45,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="UserName" text="Label">
+            <Label id="userLabelID" fx:id="UserName" text="USER">
                <font>
                   <Font size="30.0" />
                </font>
@@ -56,12 +56,12 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button mnemonicParsing="false" onAction="#onRefresh" text="Refresh">
+            <Button id="refreshID" mnemonicParsing="false" onAction="#onRefresh" text="Refresh">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#logout" text="Logout">
+            <Button id="logoutID" mnemonicParsing="false" onAction="#logout" text="Logout">
                <font>
                   <Font size="24.0" />
                </font>

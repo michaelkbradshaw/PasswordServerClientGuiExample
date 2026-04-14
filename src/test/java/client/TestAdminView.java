@@ -2,21 +2,20 @@ package client;
 
 //import static org.assertj.core.api.Assertions.assertThat;
 import org.testfx.assertions.api.Assertions;
+
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.util.WaitForAsyncUtils;
-
 import client.model.TestingPasswordModel;
 import client.model.ViewTransitionalModel;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 
 @ExtendWith(ApplicationExtension.class)
 public class TestAdminView
@@ -25,97 +24,81 @@ public class TestAdminView
 	
 	TestingPasswordModel model;
 	ViewTransitionalModel tm; 
+
+	
+	
+	String logs[] = {"A","B","C"};
+	String reqs[] = {"W","X","Y","Z"};
+	String reqs2[] = {"G","K","W","X","Y","Z"};
+	String user = "Carol";
 	
 	@Start  //Before
 	  private void start(Stage stage)
 	  {
 		model = new TestingPasswordModel();
+		model.getUsername().set(user);
+
+		Collections.addAll(model.logsA,logs);
+		Collections.addAll(model.requestsA,reqs);
+		
+		
 		tm = new ViewTransitionalModel(stage, model);
-		tm.showLoginScene();
+		tm.showAdminScene();
 		stage.show();
 	  }
 
 	
-	private void clearTextField(FxRobot robot,String selector)
-	  {
-		  TextField tf = robot.lookup(selector)
-		  .queryAs(TextField.class);
-		  
-		  Platform.runLater(()->{tf.clear();});
-		  WaitForAsyncUtils.waitForFxEvents();
-		  
-	  }
 	
-	
-	private void enterUser(FxRobot robot, String text)
-	  {
-		clearTextField(robot,"#userNameID");
-	    robot.clickOn("#userNameID");
-	    robot.write(text);
-	  }
-	
-	private void enterPassword(FxRobot robot, String text)
-	  {
-		clearTextField(robot,"#passwordID");
-	    robot.clickOn("#passwordID");
-	    robot.write(text);
-	  }
-
-	
-	private void pressRequest(FxRobot robot)
+	private void pressRefresh(FxRobot robot)
 	{
-		robot.clickOn("#requestID");
+		robot.clickOn("#refreshID");
 	}
 	
-	private void pressLogin(FxRobot robot)
+	private void pressLogout(FxRobot robot)
 	{
-		robot.clickOn("#loginID");
+		robot.clickOn("#logoutID");
 	}
 	
 	
 	
-	
-	@Test
-	public void requestID(FxRobot robot)
+	public void checkIfListViewHasElements(FxRobot robot, String target,String elements[])
 	{
-		//Ask for a 
-		enterUser(robot,"bob");
-		pressRequest(robot);
-		FxAssert.verifyThat(".dialog-pane", NodeMatchers.isVisible());
-		 
-		String response = "Password for bob is bobPW";
-    	
-		Assertions.assertThat(robot.lookup(response).queryAs(Label.class)).hasText(response);
-		robot.clickOn("OK");
+		ListView<String> lv = (ListView<String>) robot.lookup(target)
+	       .queryAll().iterator().next();
 		
-
-		enterUser(robot,"alice");
-		pressRequest(robot);
-		FxAssert.verifyThat(".dialog-pane", NodeMatchers.isVisible());
-		 
-		response = "Password for alice is alicePW";
-    	
-		Assertions.assertThat(robot.lookup(response).queryAs(Label.class)).hasText(response);
-		robot.clickOn("OK");
-
-	}
-	
-	
-	@Test
-	public void badLogin(FxRobot robot)
-	{
 		
-		enterUser(robot,"bob");
-		enterPassword(robot,"obo");
-		pressLogin(robot);
-		FxAssert.verifyThat(".dialog-pane", NodeMatchers.isVisible());
-		 
-		String response = "Bad UserName/Password";
-    	
-		Assertions.assertThat(robot.lookup(response).queryAs(Label.class)).hasText(response);
-		robot.clickOn("OK");
+		Assertions.assertThat(lv).hasExactlyNumItems(elements.length);
+		
+		for(String i:elements)
+	    {
+	     Assertions.assertThat(lv).hasListCell(i); 
+	      
+	    }
+		
 	}
 	
+		
+	@Test
+	public void testDisplay(FxRobot robot)
+	{
+		Assertions.assertThat(robot.lookup("#userLabelID").queryAs(Label.class)).hasText(user);
+		
+		this.checkIfListViewHasElements(robot,"#requestLVID" , reqs);
+		this.checkIfListViewHasElements(robot,"#LoggedLVID",logs);
+		
+	
+		
+		model.requestsA.clear();
+		Collections.addAll(model.requestsA,reqs2);
+		pressRefresh(robot);
+		
+		Assertions.assertThat(robot.lookup("#userLabelID").queryAs(Label.class)).hasText(user);
+		
+		this.checkIfListViewHasElements(robot,"#requestLVID" , reqs2);
+		this.checkIfListViewHasElements(robot,"#LoggedLVID",logs);
+		
+		
+	}
 	
 	
 	
