@@ -87,6 +87,7 @@ public class RESTPasswordServer extends SpringBootServletInitializer
 	}
 	
 
+	/* This is only for debugging purposes, left here for posterity */
 	@GetMapping("/server")
 	public String getServer()
 	{
